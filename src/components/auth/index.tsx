@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { login, signin } from '../../redux/auth/actions';
 import { useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
+import config from '../../config';
 
 type FieldType = {
   username?: string;
@@ -117,7 +118,7 @@ const AuthPage: React.FC<AuthProps> = ({ mode }) => {
             name="password"
             rules={[
               { required: true, message: t("error.password_required") },
-              {validator: validatePassword}
+              { validator: (_, value) => validatePassword(value) }
             ]}
             style={{
               width: '100%',
@@ -195,6 +196,9 @@ const AuthPage: React.FC<AuthProps> = ({ mode }) => {
               {isLogin ? t("btn.login") : t("btn.register")}
             </Button>
           </Form.Item>
+          <Button type="link" block href={isLogin? config.routes.register : config.routes.login}>
+            {!isLogin ? t("btn.login") : t("btn.create_account")}
+          </Button>
         </Form>
       </Card>
     </div>
