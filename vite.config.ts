@@ -8,4 +8,7 @@ export default defineConfig({
     react(),
     envCompatible(),
   ],
+  build: {
+    outDir: 'dist',
+  },
 })
