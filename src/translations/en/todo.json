@@ -1,0 +1,24 @@
+{
+  "options": {
+    "title": "Title",
+    "date_asc": "Latest created date",
+    "date_desc": "Oldest created date"
+  },
+  "search": {
+    "placeholder": "Search Todo"
+  },
+  "main": {
+    "header_title": "ToDo List",
+    "header_edit": "Edit ToDo",
+    "header_add": "Add ToDo"
+  },
+  "btn": {
+    "add": "Add",
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "input": {
+    "placeholder_title": "Title",
+    "placeholder_content": "Content"
+  }
+}
