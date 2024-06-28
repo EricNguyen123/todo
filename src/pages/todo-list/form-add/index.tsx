@@ -54,11 +54,11 @@ const FormAdd: React.FC<Props> = ({ openModal, hideModal, isEdit, defaultValues 
     console.log('Failed:', errorInfo);
   };
 
-  const onChange: DatePickerProps['onChange'] = (date, dateString) => {
+  const onChange: DatePickerProps['onChange'] = (_, dateString) => {
     setDate(dateString);
   };
 
-  const onChangeTime: TimePickerProps['onChange'] = (time, timeString) => {
+  const onChangeTime: TimePickerProps['onChange'] = (_, timeString) => {
     setTime(timeString);
   };
 
