@@ -2,7 +2,6 @@ import React from 'react';
 import type { FormProps } from 'antd';
 import { Button, Card, Checkbox, Form, Input, message } from 'antd';
 import type { StoreValue } from 'rc-field-form/lib/interface';
-import { RuleObject } from 'antd/es/form';
 import { useDispatch } from 'react-redux';
 import { login, signin } from '../../redux/auth/actions';
 import { useNavigate } from 'react-router';
@@ -31,7 +30,7 @@ const AuthPage: React.FC<AuthProps> = ({ mode }) => {
   const navigate = useNavigate();
   const { t } = useTranslation('auth');
 
-  const validatePassword = (rule: RuleObject, value: StoreValue): Promise<void> => {
+  const validatePassword = (value: StoreValue): Promise<void> => {
     if (value.length < 8) {
       return Promise.reject(t("error.password_8_characters"));
     }
@@ -48,7 +47,7 @@ const AuthPage: React.FC<AuthProps> = ({ mode }) => {
   };
   
   const validateConfirmPassword = ({ getFieldValue }: { getFieldValue: (field: string) => StoreValue }) => ({
-    validator(rule: RuleObject, value: StoreValue): Promise<void> {
+    validator(value: StoreValue): Promise<void> {
       if (!value || getFieldValue('password') === value) {
         return Promise.resolve();
       }

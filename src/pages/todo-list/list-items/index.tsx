@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTodo, deleteTodo, putTodo } from '../../../redux/todo/actions';
 import { Card, Checkbox, message, Pagination } from 'antd';
