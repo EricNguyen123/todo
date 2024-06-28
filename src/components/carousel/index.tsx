@@ -1,31 +1,22 @@
-import { Carousel } from 'antd'
-import React from 'react'
-
-const contentStyle: React.CSSProperties = {
-  margin: '0',
-  width: '100%',
-  height: '160px',
-  color: '#fff',
-  lineHeight: '160px',
-  textAlign: 'center',
-  backgroundImage: 'url("/src/assets/banner.png")',
-  backgroundSize: 'cover',
-  backgroundPosition: 'center',
-  backgroundRepeat: 'no-repeat',
-  borderRadius: '8px',
-};
+import { Carousel, Image } from 'antd';
+import images from '../../assets';
 
 const CarouselCus = () => {
 
   return (
     <Carousel
-      style={{
-        width: '96%',
-        margin: '10px auto'
-      }}
+      className="w-[96%] h-[160px] mx-auto my-2 rounded-lg overflow-hidden"
     >
-      <div>
-        <h3 style={contentStyle}></h3>
+      <div className="flex items-center justify-center h-full">
+        <Image 
+          className="w-full h-full object-cover object-center rounded-lg" 
+          style={{
+            objectFit: 'cover',
+            objectPosition: 'center',
+          }}
+          src={images.banerImage} 
+          preview={false}
+        />
       </div>
     </Carousel>
   )
