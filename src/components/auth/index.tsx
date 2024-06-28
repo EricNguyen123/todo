@@ -7,6 +7,7 @@ import { login, signin } from '../../redux/auth/actions';
 import { useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import config from '../../config';
+import images from '../../assets';
 
 type FieldType = {
   username?: string;
@@ -85,7 +86,13 @@ const AuthPage: React.FC<AuthProps> = ({ mode }) => {
   
 
   return (
-    <div className='h-screen flex items-center justify-center bg-zinc-300'>
+    <div 
+      className="h-screen flex items-center justify-center"
+      style={{ 
+        backgroundImage: `url(${images.bgImage})`, 
+        backgroundSize: 'cover', 
+        backgroundPosition: 'center' 
+      }}>
       <Card title={isLogin ? t("title.login") : t("title.register")}>
         <Form
           name='basic'
@@ -178,27 +185,29 @@ const AuthPage: React.FC<AuthProps> = ({ mode }) => {
             </>
           )}
 
-          {isLogin && (
-            <Form.Item<FieldType>
-              name="remember"
-              valuePropName="checked"
-              wrapperCol={{ offset: 8, span: 16 }}
-              style={{
-                width: '100%',
-              }}
-            >
-              <Checkbox>{t("label.remember_me")}</Checkbox>
-            </Form.Item>
-          )}
-
           <Form.Item>
             <Button type="primary" htmlType="submit" style={{ width: '380px' }}>
               {isLogin ? t("btn.login") : t("btn.register")}
             </Button>
           </Form.Item>
-          <Button type="link" block href={isLogin? config.routes.register : config.routes.login}>
-            {!isLogin ? t("btn.login") : t("btn.create_account")}
-          </Button>
+          <div className="w-[100%] flex items-center justify-between">
+            {isLogin && (
+              <Form.Item<FieldType>
+                name="remember"
+                valuePropName="checked"
+                style={{
+                  width: '100%',
+                  margin: '5px',
+                  padding: '0'
+                }}
+              >
+                <Checkbox>{t("label.remember_me")}</Checkbox>
+              </Form.Item>
+            )}
+            <Button type="link" className="flex justify-end" block href={isLogin? config.routes.register : config.routes.login}>
+              {!isLogin ? t("btn.login") : t("btn.create_account")}
+            </Button>
+          </div>
         </Form>
       </Card>
     </div>
