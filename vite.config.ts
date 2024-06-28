@@ -7,8 +7,5 @@ export default defineConfig({
   plugins: [
     react(),
     envCompatible(),
-  ],
-  build: {
-    outDir: 'dist',
-  },
+  ]
 })
