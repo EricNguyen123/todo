@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 import { itemRoutes } from "./routes";
 import DefaultLayout from "./components/layout";
 import { RouteType } from "./types/app";
-import { currentUserID } from "./utils/user";
 import config from "./config";
 
 const publicRoutes: Array<RouteType> = [];
