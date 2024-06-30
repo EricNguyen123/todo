@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { App as AntdApp } from "antd";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -6,6 +6,7 @@ import { itemRoutes } from "./routes";
 import DefaultLayout from "./components/layout";
 import { RouteType } from "./types/app";
 import { currentUserID } from "./utils/user";
+import config from "./config";
 
 const publicRoutes: Array<RouteType> = [];
 const privateRoutes: Array<RouteType> = [];
@@ -17,8 +18,8 @@ itemRoutes.forEach((e: RouteType) => {
 const App = () => {
   const [userLogin, setUserLogin] = useState(false);
   const authSelector = useSelector(({ auth }: any) => auth);
-  const currentUserId = currentUserID();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const checkUserLoggedIn = () => (authSelector.authenticated ? true : false);
 
@@ -28,7 +29,10 @@ const App = () => {
         const isLoggedIn = await checkUserLoggedIn();
         setUserLogin(isLoggedIn);
         if (!isLoggedIn) {
-          navigate('/login');
+          const r = publicRoutes.find(i => i.path === location.pathname)
+          if (!r) {
+            navigate(config.routes.login);
+          }
         }
       } catch (error) {
         console.error('Lỗi khi kiểm tra trạng thái đăng nhập của người dùng:', error);
@@ -36,7 +40,7 @@ const App = () => {
     };
 
     checkUserLogin();
-  }, [authSelector.authenticated, currentUserId, navigate]);
+  }, [authSelector.authenticated]);
 
   return (
     <AntdApp>
