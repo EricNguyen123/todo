@@ -1,26 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MenuProps, Menu } from 'antd';
 import { useLocation, useNavigate } from 'react-router';
-import config from '../../../config';
-import { menuItem } from '../../../constants';
+import { keyPathMapping, menuItem } from '../../../constants';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../../redux/auth/actions';
+import { MenuNavigation } from '../../../common/general';
 
 type MenuItem = Required<MenuProps>['items'][number];
-
 
 interface LevelKeysProps {
   key?: string;
   children?: LevelKeysProps[];
 }
-
-const keyPathMapping: Record<string, string> = {
-  '2': config.routes.home,
-  '10': config.routes.todo_list + `?key=today`,
-  '11': config.routes.todo_list + `?key=tomorrow`,
-  '12': config.routes.todo_list + `?key=accomplished`,
-  '13': config.routes.todo_list + `?key=all`,
-};
 
 const getLevelKeys = (items1: LevelKeysProps[]) => {
   const key: Record<string, number> = {};
@@ -47,17 +38,23 @@ const getKeyFromPath = (path: string): string => {
     }
   }
 
-  return '2';
+  return MenuNavigation.HOME;
 };
 
 const NavBarLeft = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
+  const key = queryParams.get('key');
   const [stateOpenKeys, setStateOpenKeys] = useState([getKeyFromPath(location.pathname + `?${queryParams}`)]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const items: MenuItem[] = menuItem();
   const levelKeys = getLevelKeys(items as LevelKeysProps[]);
+
+  useEffect(() => {
+    key ? setStateOpenKeys([getKeyFromPath(location.pathname + `?key=${key}`)]) :
+    setStateOpenKeys([getKeyFromPath(location.pathname + `?${queryParams}`)])
+  }, [queryParams]);
   
   const onOpenChange: MenuProps['onOpenChange'] = (openKeys) => {
     const currentOpenKey = openKeys.find((key) => stateOpenKeys.indexOf(key) === -1);
@@ -81,7 +78,7 @@ const NavBarLeft = () => {
   };
 
   const onClick: MenuProps['onClick'] = (e) => {
-    if(e.key === "logout") {
+    if(e.key === MenuNavigation.LOGOUT) {
       dispatch(logout({handleRedirectPage}))
     }
     
@@ -95,7 +92,7 @@ const NavBarLeft = () => {
     <Menu
       mode="inline"
       defaultSelectedKeys={stateOpenKeys}
-      // openKeys={stateOpenKeys}
+      selectedKeys={stateOpenKeys}
       onOpenChange={onOpenChange}
       onClick={onClick}
       style={{ 

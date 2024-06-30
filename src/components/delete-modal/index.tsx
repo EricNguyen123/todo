@@ -24,8 +24,8 @@ const DeleteModal: React.FC<Props> = ({ openModal, hideModal, handleDelete }) =>
       okButtonProps={{
         style: {
           color: 'white',
-          backgroundColor: 'red',
-          borderColor: 'red',
+          backgroundColor: 'rgb(244, 63, 94)',
+          borderColor: 'rgb(244, 63, 94)',
         },
       }}
     >

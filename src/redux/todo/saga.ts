@@ -16,19 +16,26 @@ import {
 import types from "./type";
 import { currentUserID } from "../../utils/user";
 
+
 function* getTodoSaga(props: any) {
   const ID = currentUserID();
-  console.log("props.payload",props.payload)
-  const res: ResponseResult = yield call(getTodoApi, { 
-    ...props.payload, 
-    userId: parseInt(ID, 10),
-  });
+  
+  try {
+    const res: ResponseResult = yield call(getTodoApi, { 
+      ...props.payload, 
+      userId: parseInt(ID, 10),
+    });
 
-  if (res.status === 200) {
-    yield put(getTodoResult(res.data));
-  } else {
-    const isSuccess = false;
-    yield put(getTodoResult(res, isSuccess));
+    if (res.status === 200) {
+      yield put(getTodoResult(res.data));
+    } else if (res.status === 404) {
+      yield put(getTodoResult([]));
+    } else {
+      const isSuccess = false;
+      yield put(getTodoResult(res, isSuccess));
+    }
+  } catch (error) {
+    yield put(getTodoResult([]));
   }
 }
 

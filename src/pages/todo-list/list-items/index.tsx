@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTodo, deleteTodo, putTodo } from '../../../redux/todo/actions';
-import { Card, Checkbox, message, Pagination } from 'antd';
+import { Card, Checkbox, Empty, message, Pagination } from 'antd';
 import { CalendarOutlined, ClockCircleOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import Item from '../item';
 import DeleteModal from '../../../components/delete-modal';
@@ -10,6 +10,9 @@ import HomeSkeleton from '../../../components/skeleton/home-skeleton';
 import { useTranslation } from 'react-i18next';
 import { formatRelativeTime, getCurrentDate, getTomorrowDate } from '../../../utils/handlerDate';
 import { useLocation } from 'react-router';
+import { keyParams, stylesBorderCardTodo, stylesCardTodo } from '../../../constants';
+import { Complete } from '../../../common/general';
+import { Styles } from '../../../components/global-styles';
 
 const ListItems = () => {
   const location = useLocation();
@@ -30,6 +33,7 @@ const ListItems = () => {
   const duration = import.meta.env.VITE_REACT_APP_DURATION;
   const queryParams = new URLSearchParams(location.search);
   const key = queryParams.get('key');
+  const searchValue = queryParams.get('search');
 
   const onClick = () => {
     setOpenModal(true);
@@ -72,17 +76,21 @@ const ListItems = () => {
       let date = "";
       let isComplete = null;
 
-      if (key === "today") {
+      if (key === keyParams.today) {
         date = getCurrentDate();
-      } else if (key === "tomorrow") {
+      } else if (key === keyParams.tomorrow) {
         date = getTomorrowDate();
-      } else if (key === "accomplished") {
+      } else if (key === keyParams.accomplished) {
         isComplete = 1;
       }
 
+      searchValue ? 
+      dispatch(getTodo({
+        searchValue: searchValue.trim(),
+      })) :
       dispatch(getTodo({date, isComplete}))
     }
-  }, [key]);
+  }, [key, searchValue]);
 
   useEffect(() => {
     if (todoSelector && todoSelector.todos) {
@@ -133,7 +141,7 @@ const ListItems = () => {
       {!complete && todoSelector.loading ? <HomeSkeleton/>: 
       <div>
         {
-          paginatedTodos.length > 0 && (
+          paginatedTodos.length > 0 ? (
             <Checkbox.Group 
               style={{ 
                 width: '100%',
@@ -147,7 +155,9 @@ const ListItems = () => {
             >
               {paginatedTodos.map((todo: any, index) => {
                 const formDate = formatRelativeTime(todo.date);
-                const styleString = formDate.key === '0' ? "text-lime-500" : formDate.key === '1' ? "text-yellow-500" : "";
+                const styleString = todo.isComplete ? 
+                                      stylesCardTodo[Complete.TRUE] : 
+                                      stylesCardTodo[formDate.key];
                 return (
                 <Card 
                   key={index} 
@@ -155,13 +165,21 @@ const ListItems = () => {
                     width: '280px',
                     height: '190px',
                     margin: 'auto',
-                    borderColor: todo.isComplete? 'rgb(244, 63, 94)' : formDate.key === '0' ? 'rgb(132, 204, 22)' : formDate.key === '1' ? 'rgb(234, 179, 8)' : "#f0f0f0",
+                    borderColor: todo.isComplete ? stylesBorderCardTodo[Complete.TRUE] : 
+                                                    stylesBorderCardTodo[formDate.key],
                   }}
                   title={
                   <div className="flex items-center justify-start">
                     <Checkbox value={parseInt(todo.id, 10)} />
                     <span 
-                      className={`ml-[10px] cursor-pointer font-semibold text-base truncate w-4/5 ${todo.isComplete && 'text-rose-500 line-through'}`}
+                      className={`
+                        ml-[10px] 
+                        cursor-pointer 
+                        font-semibold 
+                        text-base 
+                        truncate 
+                        w-4/5 
+                        ${todo.isComplete && `line-through ${Styles.styleColorDelete}`}`}
                       onClick={() => {
                         onClick();
                         setTodo(todo);
@@ -174,26 +192,32 @@ const ListItems = () => {
                   </div>
                   <div className="flex items-center justify-between mt-[16px]">
                     <div>
-                      <span className={`text-slate-400 mr-[10px] ${styleString} ${todo.isComplete && 'line-through'}`}><CalendarOutlined className="mr-[3px]"/>{formDate.date}</span>
-                      <span className={`text-slate-400 mr-[5px] ${todo.isComplete && 'line-through'}`}><ClockCircleOutlined className="mr-[3px]"/>{todo.time}</span>
+                      <span className={`mr-[10px] ${styleString} ${todo.isComplete && 'line-through'}`}>
+                        <CalendarOutlined className="mr-[3px]"/>{formDate.date}
+                      </span>
+                      <span className={`${Styles.styleColorBaseBorder} mr-[5px] ${todo.isComplete && 'line-through'}`}>
+                        <ClockCircleOutlined className="mr-[3px]"/>{todo.time}
+                      </span>
                     </div>
                     <div>
                       <span 
                         className="mr-[10px] cursor-pointer"
                         onClick={() => { handleOnEdit(todo) }}
-                      ><EditOutlined /></span>
+                      >
+                        <EditOutlined />
+                      </span>
                       <span 
                         className="cursor-pointer" 
                         onClick={() => { handleOnDelete(todo) }}
                       >
-                        <DeleteOutlined className="text-red-500"/>
+                        <DeleteOutlined className={`${Styles.styleColorDelete}`}/>
                       </span>
                     </div>
                   </div>
                 </Card>
               )})}
             </Checkbox.Group>
-          )
+          ) : <Empty description={false} />
         }
         <Pagination 
           hideOnSinglePage={true}

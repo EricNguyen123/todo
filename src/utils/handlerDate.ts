@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { RelativeTime } from '../common/general';
 
 export const formatDate = (): string => {
     return moment().format('dddd | DD MMM | h:mma');
@@ -26,17 +27,21 @@ export function formatDateTime(dateString: string): string {
     return date.format('HH:mm DD [Month] MM, YYYY');
 }
 
-export const formatRelativeTime = (dateString: string) => {
+export const formatRelativeTime = (dateString: string) : { key: string, date: string} => {
     const now = moment();
     const inputDate = moment(dateString, "DD/MM/YYYY");
     const duration = moment.duration(inputDate.diff(now));
     const days = duration.asDays();
-    if (days <= 0) {
-        return { key: '0', date: `Today`};
+    if (days <= -2) {
+        return { key: RelativeTime.OTHER, date: dateString};
+    } else if (days > -2 && days <= -1 ) {
+        return { key: RelativeTime.YESTERDAY, date: `Yesterday`};
+    } else if (days > -1 && days <= 0) {
+        return { key: RelativeTime.TODAY, date: `Today`};
     } else if ( days > 0 && days <= 1) {
-        return { key: '1', date: `Tomorrow`};
+        return { key: RelativeTime.TOMORROW, date: `Tomorrow`};
     } else {
-        return { key: 'exit', date: dateString};
+        return { key: RelativeTime.EXIT, date: dateString};
     }
 };
 

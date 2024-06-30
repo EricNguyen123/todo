@@ -4,3 +4,14 @@ export type RouteType = {
     exact: boolean;
     isPublic: boolean;
 };
+
+export type SelectTodoOptionsType = {
+  [key: string]: {
+    sortBy: string;
+    order: string;
+  };
+};
+
+export type StylesCardTodoType = {
+  [key: string]: string
+}

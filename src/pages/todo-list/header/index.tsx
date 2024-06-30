@@ -5,9 +5,12 @@ import { Input } from 'antd';
 import type { SearchProps } from 'antd/es/input/Search';
 import { useDispatch } from 'react-redux';
 import { getTodo } from '../../../redux/todo/actions';
-import { optionSortTodoList } from '../../../constants';
+import { optionSortTodoList, SelectTodoOptions } from '../../../constants';
 import { useTranslation } from 'react-i18next';
 import { PlusOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router';
+import config from '../../../config';
+import { SelectTodo } from '../../../common/general';
 
 const { Search } = Input;
 
@@ -16,10 +19,10 @@ const Header = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const dispatch = useDispatch();
   const { t } = useTranslation('todo');
+  const navigate = useNavigate();
+
   const onSearch: SearchProps['onSearch'] = (value) => {
-    dispatch(getTodo({
-      searchValue: value.trim(),
-    }))
+    navigate(config.routes.todo_list + `?key=all${value && `&search=${value}`}`)
   };
 
   const onClick = () => {
@@ -31,11 +34,9 @@ const Header = () => {
   }
 
   const handleChange = (value: string) => {
-    const sortBy = value === '0' ? 'title' : 'date';
-    const order = value === '0' ? 'asc' : value === '1' ? 'desc' : 'asc';
     dispatch(getTodo({
-      sortBy: sortBy,
-      order: order,
+      sortBy: SelectTodoOptions[value].sortBy,
+      order: SelectTodoOptions[value].order,
     }))
   };
 
@@ -56,7 +57,7 @@ const Header = () => {
       </div>
       <div className="flex items-center justify-between">
         <Select
-          defaultValue='0'
+          defaultValue={SelectTodo.TITLE}
           style={{ 
             width: 180,
             marginRight: 20,

@@ -2,6 +2,9 @@ import { CalendarOutlined, ClockCircleOutlined, DeleteOutlined, EditOutlined } f
 import { Modal } from 'antd';
 import React from 'react';
 import { formatRelativeTime } from '../../../utils/handlerDate';
+import { stylesCardTodo } from '../../../constants';
+import { Complete } from '../../../common/general';
+import { Styles } from '../../../components/global-styles';
 
 interface Props {
   openModal: boolean;
@@ -14,13 +17,20 @@ interface Props {
 const Item: React.FC<Props> = ({ openModal, hideModal, todo, handleOnDelete, handleOnEdit }) => {
 
   const formDate = formatRelativeTime(todo.date);
-  const styleString = formDate.key === '0' ? "text-lime-500" : formDate.key === '1' ? "text-yellow-500" : "";
+  const styleString = todo.isComplete ? stylesCardTodo[Complete.TRUE] : stylesCardTodo[formDate.key];
                 
   return (
     <Modal
       title={
         <div className="flex items-center justify-start">
-          <span className={`font-semibold text-base truncate w-4/5 ${todo.isComplete && 'text-red-500 line-through'}`}>{todo.title}</span>
+          <span 
+            className={`
+              font-semibold 
+              text-base 
+              truncate 
+              w-4/5 
+              ${todo.isComplete && `line-through ${stylesCardTodo[Complete.TRUE]}`}`
+            }>{todo.title}</span>
         </div>
       }
       open={openModal}
@@ -32,8 +42,12 @@ const Item: React.FC<Props> = ({ openModal, hideModal, todo, handleOnDelete, han
       </div>
       <div className="flex items-center justify-between mt-[16px]">
         <div>
-          <span className={`text-slate-400 mr-[10px] ${styleString} ${todo.isComplete && 'line-through'}`}><CalendarOutlined className="mr-[3px]"/>{formDate.date}</span>
-          <span className={`text-slate-400 mr-[5px] ${todo.isComplete && 'line-through'}`}><ClockCircleOutlined className="mr-[3px]"/>{todo.time}</span>
+          <span className={`mr-[10px] ${styleString} ${todo.isComplete && 'line-through'}`}>
+            <CalendarOutlined className="mr-[3px]"/>{formDate.date}
+          </span>
+          <span className={`${Styles.styleColorBaseBorder} mr-[5px] ${todo.isComplete && 'line-through'}`}>
+            <ClockCircleOutlined className="mr-[3px]"/>{todo.time}
+          </span>
         </div>
         <div>
           <span 
@@ -50,7 +64,7 @@ const Item: React.FC<Props> = ({ openModal, hideModal, todo, handleOnDelete, han
               handleOnDelete(todo)
             }}
           >
-              <DeleteOutlined />
+              <DeleteOutlined className={`${Styles.styleColorDelete}`}/>
           </span>
         </div>
       </div>
