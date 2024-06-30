@@ -52,9 +52,15 @@ const NavBarLeft = () => {
   const levelKeys = getLevelKeys(items as LevelKeysProps[]);
 
   useEffect(() => {
-    key ? setStateOpenKeys([getKeyFromPath(location.pathname + `?key=${key}`)]) :
-    setStateOpenKeys([getKeyFromPath(location.pathname + `?${queryParams}`)])
-  }, [queryParams]);
+    const newPath = key 
+      ? `${location.pathname}?key=${key}` 
+      : `${location.pathname}${queryParams}`;
+    const newKey = getKeyFromPath(newPath);
+
+    if (stateOpenKeys[0] !== newKey) {
+      setStateOpenKeys([newKey]);
+    }
+  }, [key, location.pathname, queryParams]);
   
   const onOpenChange: MenuProps['onOpenChange'] = (openKeys) => {
     const currentOpenKey = openKeys.find((key) => stateOpenKeys.indexOf(key) === -1);

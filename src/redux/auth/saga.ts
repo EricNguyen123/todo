@@ -28,16 +28,17 @@ function* signinSaga(props: any) {
 
 function* loginSaga(props: any) {
   const { data, handleRedirectPage } = props.payload;
+
   const res: ResponseResult = yield call(loginApi, data);
 
-  if (res.status === 200) {
-    yield put(loginResult(res.data));
-    localStorage.setItem("data", JSON.stringify(res.data));
-    yield handleRedirectPage(config.routes.home)
-  } else {
-    const isSuccess = false;
-    yield put(loginResult(res, isSuccess));
-  }
+    if (res.status === 200) {
+      yield put(loginResult(res.data));
+      localStorage.setItem("data", JSON.stringify(res.data));
+      yield handleRedirectPage(config.routes.home)
+    } else {
+      const isSuccess = false;
+      yield put(loginResult(res, isSuccess));
+    }
 }
 
 function* logoutSaga(props: any) {
