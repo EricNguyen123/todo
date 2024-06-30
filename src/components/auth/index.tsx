@@ -31,6 +31,7 @@ const AuthPage: React.FC<AuthProps> = ({ mode }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { t } = useTranslation('auth');
+  const [form] = Form.useForm();
 
   const validatePassword = (value: StoreValue): Promise<void> => {
     if (value.length < 8) {
@@ -48,14 +49,13 @@ const AuthPage: React.FC<AuthProps> = ({ mode }) => {
     return Promise.resolve();
   };
   
-  const validateConfirmPassword = ({ getFieldValue }: { getFieldValue: (field: string) => StoreValue }) => ({
-    validator(value: StoreValue): Promise<void> {
-      if (!value || getFieldValue('password') === value) {
-        return Promise.resolve();
-      }
+  const validateConfirmPassword = (_: any, value: StoreValue): Promise<void> => {
+    if (value && value !== form.getFieldValue('password')) {
       return Promise.reject(t("error.password_match"));
-    },
-  });
+    }
+    return Promise.resolve();
+  };
+
 
   const handleRedirectPage = (path: string) => {
     isLogin ? message.success({
@@ -95,6 +95,7 @@ const AuthPage: React.FC<AuthProps> = ({ mode }) => {
       }}>
       <Card title={isLogin ? t("title.login") : t("title.register")}>
         <Form
+          form={form}
           name='basic'
           layout='vertical'
           style={{
@@ -143,7 +144,7 @@ const AuthPage: React.FC<AuthProps> = ({ mode }) => {
                 hasFeedback
                 rules={[
                   { required: true, message: t("error.password_confirm_required") },
-                  validateConfirmPassword
+                  { validator: validateConfirmPassword }
                 ]}
                 style={{
                   width: '100%',
