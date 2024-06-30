@@ -1,5 +1,7 @@
 // api.ts
 import axios from 'axios';
+import config from '../config';
+const configRoutes = config;
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_REACT_APP_API_URL,
@@ -13,6 +15,7 @@ api.interceptors.response.use(
   (error) => {
     if (error.response && error.response.status === 401) {
       localStorage.clear();
+      window.location.href = configRoutes.routes.login;
     }
     return Promise.reject(error);
   }
@@ -29,6 +32,8 @@ api.interceptors.request.use((config) => {
       if (parsedData.token) {
         config.headers.Authorization = `Bearer ${parsedData.token}`;
       }
+    } else {
+      window.location.href = configRoutes.routes.login;
     }
   return config;
 }, (error) => {
