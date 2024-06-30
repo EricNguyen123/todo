@@ -32,8 +32,6 @@ api.interceptors.request.use((config) => {
       if (parsedData.token) {
         config.headers.Authorization = `Bearer ${parsedData.token}`;
       }
-    } else {
-      window.location.href = configRoutes.routes.login;
     }
   return config;
 }, (error) => {
