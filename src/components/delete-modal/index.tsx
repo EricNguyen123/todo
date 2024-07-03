@@ -22,11 +22,7 @@ const DeleteModal: React.FC<Props> = ({ openModal, hideModal, handleDelete }) =>
       okText={t("btn.delete")}
       cancelText={t("btn.cancel")}
       okButtonProps={{
-        style: {
-          color: 'white',
-          backgroundColor: 'rgb(244, 63, 94)',
-          borderColor: 'rgb(244, 63, 94)',
-        },
+        className: "text-white bg-rose-500 border-rose-500 hover:bg-rose-500",
       }}
     >
       <span>{t("noti.delete_todo")}</span>

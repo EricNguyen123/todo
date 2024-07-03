@@ -161,6 +161,7 @@ const ListItems = () => {
                 return (
                 <Card 
                   key={index} 
+                  className="w-card-todo h-card-todo m-auto "
                   style={{
                     width: '280px',
                     height: '190px',
@@ -179,7 +180,7 @@ const ListItems = () => {
                         text-base 
                         truncate 
                         w-4/5 
-                        ${todo.isComplete && `line-through ${Styles.styleColorDelete}`}`}
+                        ${todo.isComplete && `line-through text-${Styles.styleColorDelete}`}`}
                       onClick={() => {
                         onClick();
                         setTodo(todo);
@@ -192,10 +193,10 @@ const ListItems = () => {
                   </div>
                   <div className="flex items-center justify-between mt-[16px]">
                     <div>
-                      <span className={`mr-[10px] ${styleString} ${todo.isComplete && 'line-through'}`}>
+                      <span className={`mr-[10px] text-${styleString} ${todo.isComplete && 'line-through'}`}>
                         <CalendarOutlined className="mr-[3px]"/>{formDate.date}
                       </span>
-                      <span className={`${Styles.styleColorBaseBorder} mr-[5px] ${todo.isComplete && 'line-through'}`}>
+                      <span className={`text-${Styles.styleColorBaseBorder} mr-[5px] ${todo.isComplete && 'line-through'}`}>
                         <ClockCircleOutlined className="mr-[3px]"/>{todo.time}
                       </span>
                     </div>
@@ -210,7 +211,7 @@ const ListItems = () => {
                         className="cursor-pointer" 
                         onClick={() => { handleOnDelete(todo) }}
                       >
-                        <DeleteOutlined className={`${Styles.styleColorDelete}`}/>
+                        <DeleteOutlined className={`text-${Styles.styleColorDelete}`}/>
                       </span>
                     </div>
                   </div>

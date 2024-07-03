@@ -90,9 +90,9 @@ export const keyPathMapping: Record<string, string> = {
 };
 
 export const stylesCardTodo: StylesCardTodoType = {
-  [RelativeTime.YESTERDAY]: "text-violet-500",
-  [RelativeTime.TODAY]: "text-lime-500",
-  [RelativeTime.TOMORROW]: "text-yellow-500",
+  [RelativeTime.YESTERDAY]: Styles.styleColorYesterday,
+  [RelativeTime.TODAY]: Styles.styleColorToday,
+  [RelativeTime.TOMORROW]: Styles.styleColorTomorrow,
   [RelativeTime.ACCOMPLISHED]: Styles.styleColorDelete,
   [RelativeTime.EXIT]: Styles.styleColorBaseBorder,
 }

@@ -7,7 +7,6 @@ import { login, signin } from '../../redux/auth/actions';
 import { useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import config from '../../config';
-import images from '../../assets';
 
 type FieldType = {
   username?: string;
@@ -87,24 +86,14 @@ const AuthPage: React.FC<AuthProps> = ({ mode }) => {
 
   return (
     <div 
-      className="h-screen flex items-center justify-center"
-      style={{ 
-        backgroundImage: `url(${images.bgImage})`, 
-        backgroundSize: 'cover', 
-        backgroundPosition: 'center' 
-      }}>
+      className="h-screen flex items-center justify-center bg-login bg-cover bg-center"
+    >
       <Card title={isLogin ? t("title.login") : t("title.register")}>
         <Form
           form={form}
           name='basic'
           layout='vertical'
-          style={{
-            width: '380px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexDirection: 'column',
-          }}
+          className="w-btn-login flex items-center justify-center flex-col"
           initialValues={{ remember: true }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
@@ -114,9 +103,7 @@ const AuthPage: React.FC<AuthProps> = ({ mode }) => {
             label={t("label.username")}
             name="username"
             rules={[{ required: true, message: t("error.username_required") }]}
-            style={{
-              width: '100%',
-            }}
+            className="w-[100%]"
           >
             <Input />
           </Form.Item>
@@ -128,9 +115,7 @@ const AuthPage: React.FC<AuthProps> = ({ mode }) => {
               { required: true, message: t("error.password_required") },
               { validator: (_, value) => validatePassword(value) }
             ]}
-            style={{
-              width: '100%',
-            }}
+            className="w-[100%]"
           >
             <Input.Password />
           </Form.Item>
@@ -146,9 +131,7 @@ const AuthPage: React.FC<AuthProps> = ({ mode }) => {
                   { required: true, message: t("error.password_confirm_required") },
                   { validator: validateConfirmPassword }
                 ]}
-                style={{
-                  width: '100%',
-                }}
+                className="w-[100%]"
               >
                 <Input.Password />
               </Form.Item>
@@ -156,9 +139,7 @@ const AuthPage: React.FC<AuthProps> = ({ mode }) => {
               <Form.Item<FieldType>
                 label={t('label.name')}
                 name="name"
-                style={{
-                  width: '100%',
-                }}
+                className="w-[100%]"
               >
                 <Input />
               </Form.Item>
@@ -167,9 +148,7 @@ const AuthPage: React.FC<AuthProps> = ({ mode }) => {
                 label={t("label.email")}
                 name="email"
                 rules={[{ required: true, message: t("error.email_required") }]}
-                style={{
-                  width: '100%',
-                }}
+                className="w-[100%]"
               >
                 <Input />
               </Form.Item>
@@ -177,9 +156,7 @@ const AuthPage: React.FC<AuthProps> = ({ mode }) => {
               <Form.Item<FieldType>
                 label={t("label.phone")}
                 name="phoneNumber"
-                style={{
-                  width: '100%',
-                }}
+                className="w-[100%]"
               >
                 <Input />
               </Form.Item>
@@ -187,7 +164,14 @@ const AuthPage: React.FC<AuthProps> = ({ mode }) => {
           )}
 
           <Form.Item>
-            <Button type="primary" htmlType="submit" style={{ width: '380px' }}>
+            <Button 
+              type="primary" 
+              className="
+                w-btn-login
+                bg-btn-default 
+                hover:bg-btn-hover" 
+              htmlType="submit" 
+              >
               {isLogin ? t("btn.login") : t("btn.register")}
             </Button>
           </Form.Item>
@@ -196,16 +180,21 @@ const AuthPage: React.FC<AuthProps> = ({ mode }) => {
               <Form.Item<FieldType>
                 name="remember"
                 valuePropName="checked"
-                style={{
-                  width: '100%',
-                  margin: '5px',
-                  padding: '0'
-                }}
+                className="w-[100%] m-[5px] p-[0]"
               >
                 <Checkbox>{t("label.remember_me")}</Checkbox>
               </Form.Item>
             )}
-            <Button type="link" className="flex justify-end" block href={isLogin? config.routes.register : config.routes.login}>
+            <Button 
+              type="link" 
+              className="
+                flex 
+                justify-end 
+                text-btn-default 
+                hover:text-btn-hover" 
+              block 
+              href={ isLogin ? config.routes.register : config.routes.login}
+            >
               {!isLogin ? t("btn.login") : t("btn.create_account")}
             </Button>
           </div>

@@ -1,4 +1,7 @@
 export const Styles = {
-  styleColorDelete: "text-rose-500",
-  styleColorBaseBorder: "text-slate-400",
+  styleColorYesterday: "violet-500",
+  styleColorToday: "lime-500",
+  styleColorTomorrow: "yellow-500",
+  styleColorDelete: "rose-500",
+  styleColorBaseBorder: "slate-400",
 }

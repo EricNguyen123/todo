@@ -101,10 +101,7 @@ const NavBarLeft = () => {
       selectedKeys={stateOpenKeys}
       onOpenChange={onOpenChange}
       onClick={onClick}
-      style={{ 
-        width: 256,
-        height: "100vh"
-      }}
+      className="h-screen w-menu"
       items={items}
     />
   )

@@ -75,14 +75,7 @@ const FormAdd: React.FC<Props> = ({ openModal, hideModal, isEdit, defaultValues 
         form={form}
         name={`form-${isEdit ? 'edit' : 'add'}`}
         layout="vertical"
-        style={{
-          width: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexDirection: 'column',
-          paddingTop: '20px',
-        }}
+        className="w-[100%] flex items-center justify-center flex-col pt-[20px]"
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
@@ -99,17 +92,13 @@ const FormAdd: React.FC<Props> = ({ openModal, hideModal, isEdit, defaultValues 
       >
         <Form.Item<FieldType>
           name="title"
-          style={{
-            width: '100%',
-          }}
+          className="w-[100%]"
         >
           <Input placeholder={t("input.placeholder_title")} />
         </Form.Item>
         <Form.Item<FieldType>
           name="content"
-          style={{
-            width: '100%',
-          }}
+          className="w-[100%]"
         >
           <Input.TextArea
             style={{
@@ -121,23 +110,17 @@ const FormAdd: React.FC<Props> = ({ openModal, hideModal, isEdit, defaultValues 
         </Form.Item>
         <Space
           size={'large'}
-          style={{
-            width: '100%',
-          }}
+          className="w-[100%]"
         >
           <Form.Item<FieldType>
             name="date"
-            style={{
-              width: '100%',
-            }}
+            className="w-[100%]"
           >
             <DatePicker onChange={onChange} format={'DD/MM/YYYY'} />
           </Form.Item>
           <Form.Item<FieldType>
             name="time"
-            style={{
-              width: '100%',
-            }}
+            className="w-[100%]"
           >
             <TimePicker onChange={onChangeTime} format={'HH:mm'} />
           </Form.Item>

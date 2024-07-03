@@ -5,11 +5,7 @@ const HomeSkeleton = () => {
   return (
             <div className="flex justify-start items-start">
               <Card  
-                style={{
-                  width: '280px',
-                  height: '190px',
-                  margin: '0 auto 0 26px',
-                }}
+                className="w-card-todo h-card-todo m-[0 auto 0 26px]"
                 title={<Skeleton.Input active />}
               >
                 <Skeleton.Input

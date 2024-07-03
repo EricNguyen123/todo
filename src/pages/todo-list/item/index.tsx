@@ -29,7 +29,7 @@ const Item: React.FC<Props> = ({ openModal, hideModal, todo, handleOnDelete, han
               text-base 
               truncate 
               w-4/5 
-              ${todo.isComplete && `line-through ${stylesCardTodo[Complete.TRUE]}`}`
+              ${todo.isComplete && `line-through text-${stylesCardTodo[Complete.TRUE]}`}`
             }>{todo.title}</span>
         </div>
       }
@@ -42,10 +42,10 @@ const Item: React.FC<Props> = ({ openModal, hideModal, todo, handleOnDelete, han
       </div>
       <div className="flex items-center justify-between mt-[16px]">
         <div>
-          <span className={`mr-[10px] ${styleString} ${todo.isComplete && 'line-through'}`}>
+          <span className={`mr-[10px] text-${styleString} ${todo.isComplete && 'line-through'}`}>
             <CalendarOutlined className="mr-[3px]"/>{formDate.date}
           </span>
-          <span className={`${Styles.styleColorBaseBorder} mr-[5px] ${todo.isComplete && 'line-through'}`}>
+          <span className={`text-${Styles.styleColorBaseBorder} mr-[5px] ${todo.isComplete && 'line-through'}`}>
             <ClockCircleOutlined className="mr-[3px]"/>{todo.time}
           </span>
         </div>
@@ -64,7 +64,7 @@ const Item: React.FC<Props> = ({ openModal, hideModal, todo, handleOnDelete, han
               handleOnDelete(todo)
             }}
           >
-              <DeleteOutlined className={`${Styles.styleColorDelete}`}/>
+              <DeleteOutlined className={`text-${Styles.styleColorDelete}`}/>
           </span>
         </div>
       </div>

@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.hover\:bg-btn-hover:hover {
+  background-color: theme('colors.btn-hover') !important;
+}
+
+.hover\:bg-rose-500:hover {
+  background-color: rgb(244, 63, 94) !important;
+}
+
+.hover\:text-btn-hover:hover {
+  --tw-text-opacity: 1;
+  color: rgb(5 150 105 / var(--tw-text-opacity)) !important;
+}
+
+.ant-checkbox-checked .ant-checkbox-inner {
+  background-color: theme('colors.btn-default') !important;
+  border-color: theme('colors.btn-default') !important;
+}
+
+.ant-checkbox:hover .ant-checkbox-inner {
+  border-color: theme('colors.btn-default') !important;
+}
+
+.ant-checkbox-input:focus + .ant-checkbox-inner {
+  border-color: theme('colors.btn-default') !important;
+}

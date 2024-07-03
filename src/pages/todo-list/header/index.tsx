@@ -50,9 +50,7 @@ const Header = () => {
           placeholder={t("search.placeholder")}
           onSearch={onSearch} 
           allowClear
-          style={{ 
-            width: 320,
-          }} 
+          className="w-search"
         />
       </div>
       <div className="flex items-center justify-between">
