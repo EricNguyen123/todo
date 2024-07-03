@@ -11,7 +11,7 @@ export default {
         'btn-hover': '#059669',
       },
       backgroundImage: {
-        'login': "url('src/assets/bg.png')",
+        'login': "url('assets/bg.png')",
       },
       width: {
         'btn-login': '23.75rem',
