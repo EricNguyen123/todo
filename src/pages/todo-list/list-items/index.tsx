@@ -180,7 +180,7 @@ const ListItems = () => {
                         text-base 
                         truncate 
                         w-4/5 
-                        ${todo.isComplete && `line-through text-${Styles.styleColorDelete}`}`}
+                        ${todo.isComplete && `line-through ${Styles.styleColorDelete}`}`}
                       onClick={() => {
                         onClick();
                         setTodo(todo);
@@ -193,10 +193,10 @@ const ListItems = () => {
                   </div>
                   <div className="flex items-center justify-between mt-[16px]">
                     <div>
-                      <span className={`mr-[10px] text-${styleString} ${todo.isComplete && 'line-through'}`}>
+                      <span className={`mr-[10px] ${styleString} ${todo.isComplete && 'line-through'}`}>
                         <CalendarOutlined className="mr-[3px]"/>{formDate.date}
                       </span>
-                      <span className={`text-${Styles.styleColorBaseBorder} mr-[5px] ${todo.isComplete && 'line-through'}`}>
+                      <span className={`${Styles.styleColorBaseBorder} mr-[5px] ${todo.isComplete && 'line-through'}`}>
                         <ClockCircleOutlined className="mr-[3px]"/>{todo.time}
                       </span>
                     </div>
@@ -211,7 +211,7 @@ const ListItems = () => {
                         className="cursor-pointer" 
                         onClick={() => { handleOnDelete(todo) }}
                       >
-                        <DeleteOutlined className={`text-${Styles.styleColorDelete}`}/>
+                        <DeleteOutlined className={`${Styles.styleColorDelete}`}/>
                       </span>
                     </div>
                   </div>
