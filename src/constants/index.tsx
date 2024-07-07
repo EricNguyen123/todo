@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import { MenuNavigation, RelativeTime, SelectTodo } from '../common/general';
 import { SelectTodoOptionsType, StylesCardTodoType } from '../types/app';
 import config from '../config';
-import { Styles } from '../components/global-styles';
 
 export const SelectTodoOptions: SelectTodoOptionsType = {
   [SelectTodo.TITLE]: { sortBy: 'title', order: 'asc' },
@@ -90,17 +89,19 @@ export const keyPathMapping: Record<string, string> = {
 };
 
 export const stylesCardTodo: StylesCardTodoType = {
-  [RelativeTime.YESTERDAY]: Styles.styleColorYesterday,
-  [RelativeTime.TODAY]: Styles.styleColorToday,
-  [RelativeTime.TOMORROW]: Styles.styleColorTomorrow,
-  [RelativeTime.ACCOMPLISHED]: Styles.styleColorDelete,
-  [RelativeTime.EXIT]: Styles.styleColorBaseBorder,
+  [RelativeTime.YESTERDAY]: `text-violet-500`,
+  [RelativeTime.TODAY]: `text-lime-500`,
+  [RelativeTime.TOMORROW]: `text-yellow-500`,
+  [RelativeTime.ACCOMPLISHED]: `text-rose-500`,
+  [RelativeTime.EXIT]: `text-slate-300`,
+  [RelativeTime.OTHER]: `text-slate-300`,
 }
 
 export const stylesBorderCardTodo: StylesCardTodoType = {
-  [RelativeTime.YESTERDAY]: "rgb(139, 92, 246)",
-  [RelativeTime.TODAY]: "rgb(132, 204, 22)",
-  [RelativeTime.TOMORROW]: "rgb(234, 179, 8)",
-  [RelativeTime.ACCOMPLISHED]: "rgb(244, 63, 94)",
-  [RelativeTime.EXIT]: "#f0f0f0",
+  [RelativeTime.YESTERDAY]: `border-violet-500`,
+  [RelativeTime.TODAY]: `border-lime-500`,
+  [RelativeTime.TOMORROW]: `border-yellow-500`,
+  [RelativeTime.ACCOMPLISHED]:  `border-rose-500`,
+  [RelativeTime.EXIT]: `border-slate-300`,
+  [RelativeTime.OTHER]: `border-slate-300`,
 }

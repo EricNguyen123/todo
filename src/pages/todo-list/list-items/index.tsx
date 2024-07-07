@@ -11,8 +11,8 @@ import { useTranslation } from 'react-i18next';
 import { formatRelativeTime, getCurrentDate, getTomorrowDate } from '../../../utils/handlerDate';
 import { useLocation } from 'react-router';
 import { keyParams, stylesBorderCardTodo, stylesCardTodo } from '../../../constants';
-import { Complete } from '../../../common/general';
-import { Styles } from '../../../components/global-styles';
+import { Complete, RelativeTime } from '../../../common/general';
+import classNames from 'classnames';
 
 const ListItems = () => {
   const location = useLocation();
@@ -160,27 +160,30 @@ const ListItems = () => {
                                       stylesCardTodo[formDate.key];
                 return (
                 <Card 
-                  key={index} 
-                  className="w-card-todo h-card-todo m-auto "
-                  style={{
-                    width: '280px',
-                    height: '190px',
-                    margin: 'auto',
-                    borderColor: todo.isComplete ? stylesBorderCardTodo[Complete.TRUE] : 
-                                                    stylesBorderCardTodo[formDate.key],
-                  }}
+                  key={index}
+                  className={classNames(
+                    'w-card-todo',
+                    'h-card-todo',
+                    'm-auto',
+                    {
+                      [stylesBorderCardTodo[Complete.TRUE]] : todo.isComplete,
+                      [stylesBorderCardTodo[formDate.key]] : !todo.isComplete,
+                    }
+                  )}
+                  
                   title={
                   <div className="flex items-center justify-start">
                     <Checkbox value={parseInt(todo.id, 10)} />
                     <span 
-                      className={`
-                        ml-[10px] 
-                        cursor-pointer 
-                        font-semibold 
-                        text-base 
-                        truncate 
-                        w-4/5 
-                        ${todo.isComplete && `line-through ${Styles.styleColorDelete}`}`}
+                      className={classNames(
+                        'ml-[10px]',
+                        'cursor-pointer',
+                        'font-semibold',
+                        'text-base',
+                        'truncate',
+                        'w-4/5',
+                        `${todo.isComplete && `line-through ${stylesCardTodo[RelativeTime.ACCOMPLISHED]}`}`
+                      )}
                       onClick={() => {
                         onClick();
                         setTodo(todo);
@@ -196,7 +199,7 @@ const ListItems = () => {
                       <span className={`mr-[10px] ${styleString} ${todo.isComplete && 'line-through'}`}>
                         <CalendarOutlined className="mr-[3px]"/>{formDate.date}
                       </span>
-                      <span className={`${Styles.styleColorBaseBorder} mr-[5px] ${todo.isComplete && 'line-through'}`}>
+                      <span className={`${stylesCardTodo[RelativeTime.EXIT]} mr-[5px] ${todo.isComplete && 'line-through'}`}>
                         <ClockCircleOutlined className="mr-[3px]"/>{todo.time}
                       </span>
                     </div>
@@ -211,7 +214,7 @@ const ListItems = () => {
                         className="cursor-pointer" 
                         onClick={() => { handleOnDelete(todo) }}
                       >
-                        <DeleteOutlined className={`${Styles.styleColorDelete}`}/>
+                        <DeleteOutlined className={`${stylesCardTodo[RelativeTime.ACCOMPLISHED]}`}/>
                       </span>
                     </div>
                   </div>

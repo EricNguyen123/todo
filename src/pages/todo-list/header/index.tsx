@@ -11,6 +11,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router';
 import config from '../../../config';
 import { SelectTodo } from '../../../common/general';
+import classNames from 'classnames';
 
 const { Search } = Input;
 
@@ -63,7 +64,7 @@ const Header = () => {
           onChange={handleChange}
           options={optionSortTodoList()}
         />
-        <Button type="primary" onClick={onClick}> 
+        <Button type="primary" className={classNames('bg-btn-default', 'hover:bg-btn-hover')} onClick={onClick}> 
           <PlusOutlined className="mr-[3px]"/>{t("btn.add")}
         </Button>
       </div>

@@ -3,8 +3,7 @@ import { Modal } from 'antd';
 import React from 'react';
 import { formatRelativeTime } from '../../../utils/handlerDate';
 import { stylesCardTodo } from '../../../constants';
-import { Complete } from '../../../common/general';
-import { Styles } from '../../../components/global-styles';
+import { Complete, RelativeTime } from '../../../common/general';
 
 interface Props {
   openModal: boolean;
@@ -45,7 +44,7 @@ const Item: React.FC<Props> = ({ openModal, hideModal, todo, handleOnDelete, han
           <span className={`mr-[10px] ${styleString} ${todo.isComplete && 'line-through'}`}>
             <CalendarOutlined className="mr-[3px]"/>{formDate.date}
           </span>
-          <span className={`${Styles.styleColorBaseBorder} mr-[5px] ${todo.isComplete && 'line-through'}`}>
+          <span className={`${stylesCardTodo[RelativeTime.EXIT]} mr-[5px] ${todo.isComplete && 'line-through'}`}>
             <ClockCircleOutlined className="mr-[3px]"/>{todo.time}
           </span>
         </div>
@@ -64,7 +63,7 @@ const Item: React.FC<Props> = ({ openModal, hideModal, todo, handleOnDelete, han
               handleOnDelete(todo)
             }}
           >
-              <DeleteOutlined className={`${Styles.styleColorDelete}`}/>
+              <DeleteOutlined className={`${stylesCardTodo[RelativeTime.ACCOMPLISHED]}`}/>
           </span>
         </div>
       </div>

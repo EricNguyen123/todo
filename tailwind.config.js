@@ -9,6 +9,7 @@ export default {
       colors: {
         'btn-default': '#10b981',
         'btn-hover': '#059669',
+        'actiec-item': 'rgba(209, 250, 229, 0.5)',
       },
       backgroundImage: {
         'login': "url('assets/bg.png')",
