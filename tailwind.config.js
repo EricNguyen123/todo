@@ -22,6 +22,7 @@ export default {
         'card-todo': '280px',
         'search': '320px',
         'select-md': '180',
+        'modal-form': '800px'
       },
       height: {
         'carousel': '160px',

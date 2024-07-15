@@ -1,10 +1,10 @@
 import { DatePicker, DatePickerProps, Form, FormProps, Input, Modal, Space, TimePicker, TimePickerProps } from 'antd';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { postTodo, putTodo } from '../../../redux/todo/actions';
 import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
-import JoditEditor from 'jodit-react';
+import FroalaEditor from 'react-froala-wysiwyg';
 
 interface Props {
   openModal: boolean;
@@ -27,17 +27,30 @@ const FormAdd: React.FC<Props> = ({ openModal, hideModal, isEdit, defaultValues 
   const [form] = Form.useForm<FieldType>();
   const [time, setTime] = useState<string | string[]>('');
   const [date, setDate] = useState<string | string[]>('');
-  const editor = useRef(null);
 	const [content, setContent] = useState<string>( defaultValues?.content || '');
 
   const [formValues, setFormValues] = useState(defaultValues);
 
   const config = {
-    readonly: false,
-    height: 300,
-    placeholder: t("input.placeholder_content"),
-    toolbarAdaptive: true,
-    toolbarSticky: true,
+    height: 160,
+    placeholderText:  t("input.placeholder_content"),
+    charCounterCount: true,
+    toolbarButtons: {
+      'moreText': {
+        'buttons': ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'fontSize', 'textColor', 'backgroundColor', 'inlineClass', 'inlineStyle', 'clearFormatting']
+      },
+      'moreParagraph': {
+        'buttons': ['alignLeft', 'alignCenter', 'formatOLSimple', 'alignRight', 'alignJustify', 'formatOL', 'formatUL', 'paragraphFormat', 'paragraphStyle', 'lineHeight', 'outdent', 'indent', 'quote']
+      },
+      'moreRich': {
+        'buttons': ['insertLink', 'insertImage', 'insertVideo', 'insertTable', 'emoticons', 'fontAwesome', 'specialCharacters', 'embedly', 'insertFile', 'insertHR']   
+      },
+      'moreMisc': {
+        'buttons': ['undo', 'redo', 'fullscreen', 'print', 'getPDF', 'spellChecker', 'selectAll', 'html', 'help'],
+        'align': 'right',
+        'buttonsVisible': 2
+      }
+    }
   }
 
   useEffect(() => {
@@ -77,6 +90,7 @@ const FormAdd: React.FC<Props> = ({ openModal, hideModal, isEdit, defaultValues 
 
   return (
     <Modal
+      className="w-[800px]"
       title={isEdit ? t("main.header_edit") : t("main.header_add")}
       open={openModal}
       onOk={() => form.submit()}
@@ -120,11 +134,11 @@ const FormAdd: React.FC<Props> = ({ openModal, hideModal, isEdit, defaultValues 
             placeholder={t("input.placeholder_content")}
             rows={4}
           /> */}
-          <JoditEditor 
-            ref={editor}
-            value={content}
+          <FroalaEditor
+            tag='textarea'
             config={config}
-            onBlur={newContent => setContent(newContent)}
+            model={content}
+            onModelChange={(value: string) => setContent(value)}
           />
         </Form.Item>
         <Space

@@ -77,26 +77,51 @@
   color: theme('colors.btn-default') !important;
 }
 
-.jodit-container:not(.jodit_inline) {
-  border: 1px solid theme('placeholderColor.custom-placeholder') !important;
-  border-radius: theme('borderRadius.custom') !important;
-  background-color: theme('colors.white') !important;
+#fr-logo{
+  display: none !important;
 }
 
-.jodit-toolbar__box:not(:empty) {
-  border-bottom: 1px solid theme('placeholderColor.custom-placeholder') !important;
+.fr-second-toolbar {
+  min-height: 18px;
+  border-radius: 0 0 theme('borderRadius.custom') theme('borderRadius.custom') !important;
+}
+
+.fr-toolbar.fr-top {
   border-radius: theme('borderRadius.custom') theme('borderRadius.custom') 0 0 !important;
 }
 
-.jodit-status-bar {
-  border-radius: 0 0 theme('borderRadius.custom') theme('borderRadius.custom') !important;
-  background-color: theme('colors.white') !important;
+.fr-toolbar {
+  border: 1px solid theme('placeholderColor.custom-placeholder') !important;
+  border-bottom: none !important;
 }
 
-.jodit-container:not(.jodit_inline) .jodit-editor__resize {
+.fr-box.fr-basic .fr-wrapper {
+  border: 1px solid theme('placeholderColor.custom-placeholder') !important;
+  border-top: none !important;
+  border-bottom: none !important;
+}
+
+#formatOLSimple-2 {
   display: none !important;
 }
 
-.jodit-status-bar-link {
-  display: none !important;
+.fr-toolbar .fr-more-toolbar {
+  padding-left: 0 !important;
 }
+
+.fr-toolbar .fr-btn-grp {
+  margin: 0 5px 0 5px !important;
+}
+
+.ant-modal {
+  width: theme('width.modal-form') !important;
+}
+
+.ant-modal-body ol, ul, menu {
+  padding-inline-start: 40px;
+}
+
+.fr-wrapper td, .text-sm td {
+  border-width: 1px !important;
+}
+
