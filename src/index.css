@@ -78,25 +78,25 @@
 }
 
 .jodit-container:not(.jodit_inline) {
-  border: 1px solid theme('placeholderColor.custom-placeholder');
-  border-radius: theme('borderRadius.custom');
-  background-color: theme('colors.white');
+  border: 1px solid theme('placeholderColor.custom-placeholder') !important;
+  border-radius: theme('borderRadius.custom') !important;
+  background-color: theme('colors.white') !important;
 }
 
 .jodit-toolbar__box:not(:empty) {
-  border-bottom: 1px solid theme('placeholderColor.custom-placeholder');
-  border-radius: theme('borderRadius.custom') theme('borderRadius.custom') 0 0;
+  border-bottom: 1px solid theme('placeholderColor.custom-placeholder') !important;
+  border-radius: theme('borderRadius.custom') theme('borderRadius.custom') 0 0 !important;
 }
 
 .jodit-status-bar {
-  border-radius: 0 0 theme('borderRadius.custom') theme('borderRadius.custom');
-  background-color: theme('colors.white');
+  border-radius: 0 0 theme('borderRadius.custom') theme('borderRadius.custom') !important;
+  background-color: theme('colors.white') !important;
 }
 
 .jodit-container:not(.jodit_inline) .jodit-editor__resize {
-  display: none;
+  display: none !important;
 }
 
 .jodit-status-bar-link {
-  display: none;
+  display: none !important;
 }
