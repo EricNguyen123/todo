@@ -28,6 +28,18 @@
   background-color: theme('colors.btn-hover') !important;
 }
 
+.ant-btn-primary {
+  background-color: theme('colors.btn-default') !important;
+}
+
+.ant-btn-primary:hover {
+  background-color: theme('colors.btn-hover') !important;
+}
+
+:where(.css-dev-only-do-not-override-m4timi).ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
+  color: theme('colors.btn-default') !important;
+}
+
 .ant-checkbox:hover .ant-checkbox-inner {
   border-color: theme('colors.btn-default') !important;
 }
@@ -128,4 +140,3 @@
 .fr-wrapper td, .text-sm td {
   border-width: 1px !important;
 }
-
