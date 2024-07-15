@@ -33,6 +33,7 @@ const FormAdd: React.FC<Props> = ({ openModal, hideModal, isEdit, defaultValues 
 
   const config = {
     height: 160,
+    key: 'test',
     placeholderText:  t("input.placeholder_content"),
     charCounterCount: true,
     toolbarButtons: {
