@@ -121,6 +121,10 @@
   padding-inline-start: 40px;
 }
 
+.text-sm ol, ul, menu {
+  padding-inline-start: 40px;
+}
+
 .fr-wrapper td, .text-sm td {
   border-width: 1px !important;
 }
