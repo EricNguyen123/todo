@@ -5,6 +5,8 @@ import { postTodo, putTodo } from '../../../redux/todo/actions';
 import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
 import { Editor } from '@tinymce/tinymce-react';
+import { BoldOutlined, ItalicOutlined, LinkOutlined, PictureOutlined, PlaySquareOutlined, StrikethroughOutlined, UnderlineOutlined } from '@ant-design/icons';
+import iconToSvg from '../../../utils/iconToSvg';
 
 interface Props {
   openModal: boolean;
@@ -121,6 +123,15 @@ const FormAdd: React.FC<Props> = ({ openModal, hideModal, isEdit, defaultValues 
               placeholder: t("input.placeholder_content"),
               plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate mentions tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
               toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+              setup: (editor) => {
+                editor.ui.registry.addIcon('bold', iconToSvg(BoldOutlined));
+                editor.ui.registry.addIcon('italic', iconToSvg(ItalicOutlined));
+                editor.ui.registry.addIcon('underline', iconToSvg(UnderlineOutlined));
+                editor.ui.registry.addIcon('strikethrough', iconToSvg(StrikethroughOutlined));
+                editor.ui.registry.addIcon('link', iconToSvg(LinkOutlined));
+                editor.ui.registry.addIcon('image', iconToSvg(PictureOutlined));
+                editor.ui.registry.addIcon('media', iconToSvg(PlaySquareOutlined));
+              },
             }}
             initialValue={defaultValues?.content}
             onEditorChange={(newValue,_) => setContent(newValue)}
