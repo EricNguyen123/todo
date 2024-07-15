@@ -89,40 +89,12 @@
   color: theme('colors.btn-default') !important;
 }
 
-#fr-logo{
+.tox-statusbar__branding {
   display: none !important;
 }
 
-.fr-second-toolbar {
-  min-height: 18px;
-  border-radius: 0 0 theme('borderRadius.custom') theme('borderRadius.custom') !important;
-}
-
-.fr-toolbar.fr-top {
-  border-radius: theme('borderRadius.custom') theme('borderRadius.custom') 0 0 !important;
-}
-
-.fr-toolbar {
-  border: 1px solid theme('placeholderColor.custom-placeholder') !important;
-  border-bottom: none !important;
-}
-
-.fr-box.fr-basic .fr-wrapper {
-  border: 1px solid theme('placeholderColor.custom-placeholder') !important;
-  border-top: none !important;
-  border-bottom: none !important;
-}
-
-#formatOLSimple-1, #formatOLSimple-2 {
+.tox-statusbar__resize-handle {
   display: none !important;
-}
-
-.fr-toolbar .fr-more-toolbar {
-  padding-left: 0 !important;
-}
-
-.fr-toolbar .fr-btn-grp {
-  margin: 0 5px 0 5px !important;
 }
 
 .ant-modal {
@@ -140,3 +112,4 @@
 .fr-wrapper td, .text-sm td {
   border-width: 1px !important;
 }
+

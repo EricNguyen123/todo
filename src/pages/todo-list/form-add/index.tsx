@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { postTodo, putTodo } from '../../../redux/todo/actions';
 import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
-import FroalaEditor from 'react-froala-wysiwyg';
+import { Editor } from '@tinymce/tinymce-react';
 
 interface Props {
   openModal: boolean;
@@ -21,6 +21,8 @@ type FieldType = {
   time?: string;
 };
 
+const keyTiny = import.meta.env.VITE_REACT_APP_KEY_TINY;
+
 const FormAdd: React.FC<Props> = ({ openModal, hideModal, isEdit, defaultValues }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation('todo');
@@ -30,29 +32,6 @@ const FormAdd: React.FC<Props> = ({ openModal, hideModal, isEdit, defaultValues 
 	const [content, setContent] = useState<string>( defaultValues?.content || '');
 
   const [formValues, setFormValues] = useState(defaultValues);
-
-  const config = {
-    height: 160,
-    key: 'test',
-    placeholderText:  t("input.placeholder_content"),
-    charCounterCount: true,
-    toolbarButtons: {
-      'moreText': {
-        'buttons': ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'fontSize', 'textColor', 'backgroundColor', 'inlineClass', 'inlineStyle', 'clearFormatting']
-      },
-      'moreParagraph': {
-        'buttons': ['alignLeft', 'alignCenter', 'formatOLSimple', 'alignRight', 'alignJustify', 'formatOL', 'formatUL', 'paragraphFormat', 'paragraphStyle', 'lineHeight', 'outdent', 'indent', 'quote']
-      },
-      'moreRich': {
-        'buttons': ['insertLink', 'insertTable', 'emoticons', 'fontAwesome', 'specialCharacters', 'embedly', 'insertFile', 'insertHR']   
-      },
-      'moreMisc': {
-        'buttons': ['undo', 'redo', 'fullscreen', 'print', 'spellChecker', 'selectAll', 'html', 'help'],
-        'align': 'right',
-        'buttonsVisible': 2
-      }
-    }
-  }
 
   useEffect(() => {
     setFormValues(defaultValues);
@@ -135,11 +114,16 @@ const FormAdd: React.FC<Props> = ({ openModal, hideModal, isEdit, defaultValues 
             placeholder={t("input.placeholder_content")}
             rows={4}
           /> */}
-          <FroalaEditor
-            tag='textarea'
-            config={config}
-            model={content}
-            onModelChange={(value: string) => setContent(value)}
+          <Editor
+            apiKey={keyTiny}
+            init={{
+              height: 320,
+              placeholder: t("input.placeholder_content"),
+              plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate mentions tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
+              toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+            }}
+            initialValue={defaultValues?.content}
+            onEditorChange={(newValue,_) => setContent(newValue)}
           />
         </Form.Item>
         <Space
