@@ -28,11 +28,11 @@
   background-color: theme('colors.btn-hover') !important;
 }
 
-.ant-btn-primary {
+.ant-btn-primary:not(.bg-rose-500) {
   background-color: theme('colors.btn-default') !important;
 }
 
-.ant-btn-primary:hover {
+.ant-btn-primary:hover:not(.bg-rose-500) {
   background-color: theme('colors.btn-hover') !important;
 }
 
@@ -97,7 +97,7 @@
   display: none !important;
 }
 
-.ant-modal {
+.custom-form-add {
   width: theme('width.modal-form') !important;
 }
 

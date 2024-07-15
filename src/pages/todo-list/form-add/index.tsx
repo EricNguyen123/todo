@@ -72,7 +72,7 @@ const FormAdd: React.FC<Props> = ({ openModal, hideModal, isEdit, defaultValues 
 
   return (
     <Modal
-      className="w-[800px]"
+      className="custom-form-add"
       title={isEdit ? t("main.header_edit") : t("main.header_add")}
       open={openModal}
       onOk={() => form.submit()}
