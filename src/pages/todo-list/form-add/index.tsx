@@ -1,9 +1,10 @@
 import { DatePicker, DatePickerProps, Form, FormProps, Input, Modal, Space, TimePicker, TimePickerProps } from 'antd';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { postTodo, putTodo } from '../../../redux/todo/actions';
 import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
+import JoditEditor from 'jodit-react';
 
 interface Props {
   openModal: boolean;
@@ -26,8 +27,18 @@ const FormAdd: React.FC<Props> = ({ openModal, hideModal, isEdit, defaultValues 
   const [form] = Form.useForm<FieldType>();
   const [time, setTime] = useState<string | string[]>('');
   const [date, setDate] = useState<string | string[]>('');
+  const editor = useRef(null);
+	const [content, setContent] = useState<string>( defaultValues?.content || '');
 
   const [formValues, setFormValues] = useState(defaultValues);
+
+  const config = {
+    readonly: false,
+    height: 300,
+    placeholder: t("input.placeholder_content"),
+    toolbarAdaptive: true,
+    toolbarSticky: true,
+  }
 
   useEffect(() => {
     setFormValues(defaultValues);
@@ -37,12 +48,14 @@ const FormAdd: React.FC<Props> = ({ openModal, hideModal, isEdit, defaultValues 
     isEdit ? 
       dispatch(putTodo({ 
         ...values, 
+        content,
         date: date && date || defaultValues?.date, 
         time: time && time || defaultValues?.time, 
         id: defaultValues?.id 
       })) : 
       dispatch(postTodo({ 
         ...values, 
+        content,
         date, 
         time 
       }));
@@ -100,12 +113,18 @@ const FormAdd: React.FC<Props> = ({ openModal, hideModal, isEdit, defaultValues 
           name="content"
           className="w-[100%]"
         >
-          <Input.TextArea
+          {/* <Input.TextArea
             style={{
               resize: 'none',
             }}
             placeholder={t("input.placeholder_content")}
             rows={4}
+          /> */}
+          <JoditEditor 
+            ref={editor}
+            value={content}
+            config={config}
+            onBlur={newContent => setContent(newContent)}
           />
         </Form.Item>
         <Space

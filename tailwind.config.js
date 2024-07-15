@@ -10,6 +10,7 @@ export default {
         'btn-default': '#10b981',
         'btn-hover': '#059669',
         'actiec-item': 'rgba(209, 250, 229, 0.5)',
+        'white': 'rgb(255 255 255)',
       },
       backgroundImage: {
         'login': "url('assets/bg.png')",
@@ -25,7 +26,13 @@ export default {
       height: {
         'carousel': '160px',
         'card-todo': '190px',
-      }
+      },
+      borderRadius: {
+        'custom': '8px',
+      },
+      placeholderColor: {
+        'custom-placeholder': '#d9d9d9',
+      },
     },
   },
   plugins: [],

@@ -76,3 +76,27 @@
 .ant-menu-light .ant-menu-submenu-selected >.ant-menu-submenu-title {
   color: theme('colors.btn-default') !important;
 }
+
+.jodit-container:not(.jodit_inline) {
+  border: 1px solid theme('placeholderColor.custom-placeholder');
+  border-radius: theme('borderRadius.custom');
+  background-color: theme('colors.white');
+}
+
+.jodit-toolbar__box:not(:empty) {
+  border-bottom: 1px solid theme('placeholderColor.custom-placeholder');
+  border-radius: theme('borderRadius.custom') theme('borderRadius.custom') 0 0;
+}
+
+.jodit-status-bar {
+  border-radius: 0 0 theme('borderRadius.custom') theme('borderRadius.custom');
+  background-color: theme('colors.white');
+}
+
+.jodit-container:not(.jodit_inline) .jodit-editor__resize {
+  display: none;
+}
+
+.jodit-status-bar-link {
+  display: none;
+}

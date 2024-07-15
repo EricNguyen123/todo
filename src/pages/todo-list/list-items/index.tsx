@@ -136,6 +136,10 @@ const ListItems = () => {
 
   const paginatedTodos = todos.slice((currentPage - 1) * pageSize, currentPage * pageSize);
 
+  const createMarkup = (html: string) => {
+    return { __html: html };
+  };
+
   return (
     <>
       {!complete && todoSelector.loading ? <HomeSkeleton/>: 
@@ -192,7 +196,7 @@ const ListItems = () => {
                   </div>}
                 >
                   <div className="w-full h-[60px] text-ellipsis overflow-hidden">
-                    <span className="text-sm">{todo.content}</span>
+                    <span className="text-sm" dangerouslySetInnerHTML={createMarkup(todo.content)}></span>
                   </div>
                   <div className="flex items-center justify-between mt-[16px]">
                     <div>

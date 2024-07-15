@@ -17,7 +17,10 @@ const Item: React.FC<Props> = ({ openModal, hideModal, todo, handleOnDelete, han
 
   const formDate = formatRelativeTime(todo.date);
   const styleString = todo.isComplete ? stylesCardTodo[Complete.TRUE] : stylesCardTodo[formDate.key];
-                
+  const createMarkup = (html: string) => {
+    return { __html: html };
+  };
+
   return (
     <Modal
       title={
@@ -37,7 +40,7 @@ const Item: React.FC<Props> = ({ openModal, hideModal, todo, handleOnDelete, han
       footer={null}
     >
       <div className="w-full h-[280px] overflow-y-auto">
-        <span className="text-sm">{todo.content}</span>
+        <span className="text-sm" dangerouslySetInnerHTML={createMarkup(todo.content)}></span>
       </div>
       <div className="flex items-center justify-between mt-[16px]">
         <div>
