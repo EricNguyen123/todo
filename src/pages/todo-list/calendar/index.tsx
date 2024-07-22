@@ -45,7 +45,7 @@ const CalendarCus: React.FC<Props> = ({ openModal, hideModal }) => {
     }
   };
 
-  const onPanelChange = (newValue: Dayjs, newMode: string) => {
+  const onPanelChange = (_: any, newMode: string) => {
     setMode(newMode);
   };
 
