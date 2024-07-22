@@ -1,5 +1,6 @@
 import moment from 'moment';
 import { RelativeTime } from '../common/general';
+import dayjs from 'dayjs';
 
 export const formatDate = (): string => {
     return moment().format('dddd | DD MMM | h:mma');
@@ -51,4 +52,12 @@ export const getCurrentDate = (): string => {
 
 export const getTomorrowDate = (): string => {
     return moment().add(1, 'days').startOf('day').format('DD/MM/YYYY');
+};
+
+export const convertDayjsToDate = (dayjsValue: dayjs.Dayjs): string => {
+    return dayjsValue.format('DD/MM/YYYY');
+};
+
+export const getMonthYear = (dayjsValue: dayjs.Dayjs): string => {
+    return dayjsValue.format('MM/YYYY');
 };

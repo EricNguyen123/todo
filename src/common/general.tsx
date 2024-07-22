@@ -30,3 +30,9 @@ export enum RelativeTime {
   ACCOMPLISHED = Complete.TRUE,
   EXIT = 'exit',
 }
+
+export enum DateFormat {
+  DATE = 'date',
+  MONTH = 'month',
+  YEAR = 'year',
+}

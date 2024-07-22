@@ -101,6 +101,10 @@
   width: theme('width.modal-form') !important;
 }
 
+.custom-calendar {
+  width: theme('width.modal-calendar') !important;
+}
+
 .ant-modal-body ol, ul, menu {
   padding-inline-start: 40px;
 }
